@@ -8,23 +8,13 @@ define(function (require, exports, module) {
     var CommandManager = brackets.getModule("command/CommandManager"),
         Menus          = brackets.getModule("command/Menus");
 
+    var LanguageManager = brackets.getModule("language/LanguageManager");
 
-    // Function to run when the menu item is clicked
-    function handleHelloWorld() {
-        window.alert("Hello, world!");
-    }
-
-
-    // First, register a command - a UI-less object associating an id to a handler
-    var MY_COMMAND_ID = "helloworld.sayhello";   // package-style naming to avoid collisions
-    CommandManager.register("Hello World", MY_COMMAND_ID, handleHelloWorld);
-
-    // Then create a menu item bound to the command
-    // The label of the menu item is the name we gave the command (see above)
-    var menu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
-    menu.addMenuItem(MY_COMMAND_ID);
-
-    // We could also add a key binding at the same time:
-    //menu.addMenuItem(MY_COMMAND_ID, "Ctrl-Alt-H");
-    // (Note: "Ctrl" is automatically mapped to "Cmd" on Mac)
+	LanguageManager.defineLanguage("typescript", {
+		name: "TypeScript",
+		mode: ["javascript", "application/typescript"],
+		fileExtensions: ["ts"],
+		blockComment: ["/*", "*/"],
+		lineComment: ["//"]
+	});
 });
